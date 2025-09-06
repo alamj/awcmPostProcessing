@@ -17,3 +17,38 @@ t, u = av.get_time_series(out, [1680, 1320, 150], 6, 0, "UPrime2Mean") // xx
 t, u = av.get_time_series(out, [1680, 1320, 150], 6, 1, "UPrime2Mean") // xy
 t, u = av.get_time_series(out, [1680, 1320, 150], 6, 2, "UPrime2Mean") // xz
 t, u = av.get_time_series(out, [1680, 1320, 150], 6, 3, "UPrime2Mean") // yy
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+awcmviewer can read the entire flow over a single time step and extract fields values on a line connecting pointA to pointB. This can be done from vdi node as:
+
+mpirun -np 16 /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analysis line -fields 'U UPrime2Mean UMean' -time 3600 -out fowf15mwR0 -pwd -pointA '10 1320 0' -pointB '10 1320 960'
+
+It would be more efficient to submit a batch job for extracting data over multiple lines as:
+
+srun /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analysis line -fields 'U UPrime2Mean UMean' -time 3600 -out fowf15mwR0 -pwd -pointA '10 1320 0' -pointB '10 1320 960' > line1.out
+
+srun /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analysis line -fields 'U UPrime2Mean UMean' -time 3600 -out fowf15mwR0 -pwd -pointA '90 1320 0' -pointB '90 1320 960' > line2.out
+
+add more lines as needed
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+extract flow field on a 2D plane and save as xdmf + h5 
+
+srun /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analysis line -fields 'U UPrime2Mean UMean Q Vort' -time 3600 -out fowf15mwR0 -pwd -pointA '90 1320 150' -pointB '0 0 1' > slice.out
+
+here, pointA is a reference point and pointB is a unit vector, which defines a plane over which the flow is extracted. 
+
+Reconstruct 3D flow field and save as xdmf + h5 fomat:
+
+srun /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analysis xdmf -fields 'U UPrime2Mean UMean Q Vort' -time 3600 -out fowf15mwR0 -pwd  > xdmf.out
+
+
+
+
+
+
+
+
+
