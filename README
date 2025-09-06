@@ -1,1 +1,11 @@
 README
+
+
+Read postProcessing/probes/time/fields and save as statistics/xdmf/fowf15mwR0.h5
+
+/project/def-alamj/shared/bin/v2306/awcmviewer -INP post_probes.inp -analysis probes -fields 'U UPrime2Mean UMean' -time 0 -out fowf15mwR0 -pwd
+
+Read timeseries of streamwise velocity (t, Ux) at probe (1680, 1320, 150):
+
+path = "/scratch/alamj/WindFarms/fowf15mwR0/statistics/xdmf/fowf15mwR0.h5"
+t, u = av.get_time_series(out, [1680, 1320, 150], 3, 0, "U")
