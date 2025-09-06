@@ -1,5 +1,8 @@
 
 # Scale Adaptive Large Eddy Simulation (SALES)
+The SALES framework has been implemented over libMesh+PETSc and OpenFOAM. The libMesh-version is based on wavelet-based higher order discretization. The OpenFOAM-version is based on second-order finite volume discretization, which peserves the skew-symmetry of Navier-Stokes equation. 
+
+SALES adopts three principles: i) implicit filtering of Navier-Stokes equation should preserve the skew-symmetry of nonlinear differential operator ii) adopt an explicit filter to construct the structural for of subgrid-scale stress, and iii) find an optimal eddy viscosity that follows Kolmogorov refined similarity hypothesis. 
 
 ## AWCMViewer - Probes -> HDF5 Quickstart
 
