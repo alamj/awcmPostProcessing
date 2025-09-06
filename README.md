@@ -3,7 +3,10 @@
 # AWCMViewer - Probes -> HDF5 Quickstart
 
 
-### An example: how to read postProcessing/probes/time/fields and save as statistics/xdmf/fowf15mwR0.h5
+### An example: how to read probe data and convert to HDF5 format.
+
+Raw data is located in case directory under postProcessing/probes/time/fields, where fields maybe U, UPrime2Mean, UMean, etc.
+We want to save time, probe coordinates, and time series of fields within the case directory as statistics/xdmf/fowf15mwR0.h5
 
 /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_probes.inp -analysis probes -fields 'U UPrime2Mean UMean' -time 0 -out fowf15mwR0 -pwd
 
