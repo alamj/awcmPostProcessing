@@ -1,9 +1,9 @@
 
 
-### AWCMViewer - Probes -> HDF5 Quickstart
+# AWCMViewer - Probes -> HDF5 Quickstart
 
 
-# An example: how to read postProcessing/probes/time/fields and save as statistics/xdmf/fowf15mwR0.h5
+### An example: how to read postProcessing/probes/time/fields and save as statistics/xdmf/fowf15mwR0.h5
 
 /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_probes.inp -analysis probes -fields 'U UPrime2Mean UMean' -time 0 -out fowf15mwR0 -pwd
 
