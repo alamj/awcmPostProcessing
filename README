@@ -1,11 +1,19 @@
 README
 
 
-Read postProcessing/probes/time/fields and save as statistics/xdmf/fowf15mwR0.h5
+An example of how to read postProcessing/probes/time/fields and save as statistics/xdmf/fowf15mwR0.h5
 
 /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_probes.inp -analysis probes -fields 'U UPrime2Mean UMean' -time 0 -out fowf15mwR0 -pwd
+
+/project/def-alamj/shared/bin/v2306/awcmviewer -INP post_probes.inp -analysis probes -fields 'U UPrime2Mean UMean' -time 0 -out fowf15mwR0 -pwd -pod 1
+
+The last option [-pod value] indicates to apply a POD filter. If value = 0, only the strongest mode is used. If value = 1, no POD filtering is used. 
 
 Read timeseries of streamwise velocity (t, Ux) at probe (1680, 1320, 150):
 
 path = "/scratch/alamj/WindFarms/fowf15mwR0/statistics/xdmf/fowf15mwR0.h5"
-t, u = av.get_time_series(out, [1680, 1320, 150], 3, 0, "U")
+t, u = av.get_time_series(out, [1680, 1320, 150], 3, 0, "U") // Ux
+t, u = av.get_time_series(out, [1680, 1320, 150], 6, 0, "UPrime2Mean") // xx 
+t, u = av.get_time_series(out, [1680, 1320, 150], 6, 1, "UPrime2Mean") // xy
+t, u = av.get_time_series(out, [1680, 1320, 150], 6, 2, "UPrime2Mean") // xz
+t, u = av.get_time_series(out, [1680, 1320, 150], 6, 3, "UPrime2Mean") // yy
