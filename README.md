@@ -4,6 +4,8 @@ The SALES framework has been implemented over libMesh+PETSc and OpenFOAM. The li
 
 SALES adopts three principles: i) implicit filtering of Navier-Stokes equation should preserve the skew-symmetry of nonlinear differential operator ii) adopt an explicit filter to construct the structural for of subgrid-scale stress, and iii) find an optimal eddy viscosity that follows Kolmogorov refined similarity hypothesis. 
 
+The following document aims to help post-processing the results of OpenFOAM-based SALES methodology.
+
 ## AWCMViewer - Probes -> HDF5 Quickstart
 
 
