@@ -6,6 +6,16 @@ SALES adopts three principles: i) implicit filtering of Navier-Stokes equation s
 
 The following document aims to help post-processing the results of OpenFOAM-based SALES methodology.
 
+## VDI node configuration
+Using TigerVNC client, connect to gra-vdi.alliancecan.ca
+
+Use your usual login credential, which will reach you into a graphical desktop. You can use this graphical desktop as if you are using your laptop, as long as you have a standard high speed internet connection. 
+
+On a terminal [ module load CcEnv StdEnv/2023 ] will bring standard compute environment. 
+
+On the same terminal [ mdule load paraview ] will allow you to run paraview using the terminal command [paraview]
+
+
 ## AWCMViewer - Probes -> HDF5 Quickstart
 
 Probes are fixed sensors placed in the computational domain. Each sensor collects time series of select fields at every time step of the entire run of the model. Due to Langrangian view of fluid flows and Taylor's frozen turbulence hypothesis, each sensor is affected by eddies passing through multiple sensor. In datascience view, it is crucial to project the sensed flow onto a low-dimensional vector space. SALES framework has developed a SURE-WT algorithm for extracting coherent structures from the probe data. Some relevant tools are indicated below, which is a work in-progress. 
