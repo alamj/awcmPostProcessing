@@ -21,7 +21,7 @@ We want to save time, probe coordinates, and time series of fields within the ca
 
 The last option [-pod value] indicates to apply a POD filter. If value = 0, only the strongest mode is used. If value = 1, no POD filtering is used. Default value is 1. 
 
-The HDF5 data can be proced with phython (h5py), Matlab, or C++ xtensor. Some helper python code is given in awcmviewerutils.py. The idea is to provide the desried probe coordinate and extract the time series for plotting purposes. 
+The HDF5 data can be processed with python (h5py), Matlab, or C++ xtensor. Some helper python code is given in awcmviewerutils.py. The idea is to provide the desried probe coordinate and extract the time series for plotting purposes. 
 
 Below is an example of how to read timeseries of streamwise velocity (t, Ux) at probe (1680, 1320, 150):
 
