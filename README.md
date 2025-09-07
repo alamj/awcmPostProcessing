@@ -64,6 +64,18 @@ t, u = av.get_time_series(out, [1680, 1320, 150], 6, 2, "UPrime2Mean") # xz
 
 t, u = av.get_time_series(out, [1680, 1320, 150], 6, 3, "UPrime2Mean") # yy
 
+Alternatively, use the following example:
+
+loc = [1680, 1320, 150]
+
+t = av.fetch_time_series(out, loc, 0, "time")
+
+u = av.fetch_time_series(out, loc, 0, "U")
+
+u = av.fetch_time_series(out, loc, 1, "UPrime2Mean")
+
+
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ### Parallel Reconstruction and Sampling
