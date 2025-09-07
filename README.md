@@ -15,6 +15,23 @@ On a terminal [ module load CcEnv StdEnv/2023 ] will bring standard compute envi
 
 On the same terminal [ mdule load paraview ] will allow you to run paraview using the terminal command [paraview]
 
+## RUN python code 
+
+Using TigerVNC, bring the standard compute environment.
+
+On the same terminal, load python as [ module load python/3.10 ]
+
+On the same terminal, load numpy etc as [ module load scipy-stack ]
+
+Using the same terminal, create a virtual environment [ virtualenv --no-download ~/ENV ]
+
+Activate the virtual environment, [ source ~/ENV/bin/activate ]
+
+You can run a python script as [ python your_script.py ]
+
+Deactivate the environment as [deactivate]
+
+
 
 ## AWCMViewer - Probes -> HDF5 Quickstart
 
