@@ -8,12 +8,12 @@ sys.path.insert(0, "/project/def-alamj/shared/include/pyutils")
 
 import awcmviewerutils as av
 
-
+# replace with correct path
 out = "/scratch/alamj/WindFarms/fowf15mwR0/statistics/xdmf/fowf15mwR0.h5"
 
-
+# 3 in 3rd last parameter indicate U is a vector, use 6 if passing UPrime2Mean
 t, u = av.get_time_series(out, [1680, 1320, 150], 3, 0, "U")
 
 print(t.shape, u.shape)
 plt.plot(t,u)
-plt.show()}
+plt.show()
