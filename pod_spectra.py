@@ -9,6 +9,14 @@ sys.path.insert(0, "/project/def-alamj/shared/include/pyutils")
 
 import awcmviewerutils as av
 
+"""
+data collection tool
+/project/def-alamj/shared/bin/v2306/xpostabl -INP post_probes.inp -analysis probes -fields 'U' -time 500 -out fowf15mwR0 -pwd -pod 1 # raw data
+/project/def-alamj/shared/bin/v2306/xpostabl -INP post_probes.inp -analysis probes -fields 'U' -time 500 -out fowf15mwR0 -pwd -pod 0 # rank 1 pod
+/project/def-alamj/shared/bin/v2306/xpostabl -INP post_probes.inp -analysis probes -fields 'U' -time 500 -out fowf15mwR0 -pwd -pod -1 # rank 1 pod residual
+
+"""
+
 
 """
 adjust the user dependent path.
