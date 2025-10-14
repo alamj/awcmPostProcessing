@@ -1,0 +1,10 @@
+HDF_INDEX 1;  
+
+mode     hdf5;
+
+output   fow15mwR2;
+
+fields
+(
+C U Gij nut Rij Lij
+);
