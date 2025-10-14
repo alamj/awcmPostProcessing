@@ -6,14 +6,10 @@ SALES adopts three principles: i) implicit filtering of Navier-Stokes equation s
 
 The following document aims to help post-processing the results of OpenFOAM-based SALES methodology.
 
-## VDI node configuration
-Using TigerVNC client, connect to gra-vdi.alliancecan.ca
+## postABlpar
 
-Use your usual login credential, which will reach you into a graphical desktop. You can use this graphical desktop as if you are using your laptop, as long as you have a standard high speed internet connection. 
+srun /project/def-alamj/shared/bin/v2306/postABLpar hdf5.txt -time 150 -parallel
 
-On a terminal [ module load CcEnv StdEnv/2023 ] will bring standard compute environment. 
-
-On the same terminal [ mdule load paraview ] will allow you to run paraview using the terminal command [paraview]
 
 ## RUN python code 
 
