@@ -7,8 +7,40 @@ SALES adopts three principles: i) implicit filtering of Navier-Stokes equation s
 The following document aims to help post-processing the results of OpenFOAM-based SALES methodology.
 
 ## postABlpar
+This utility will convert OpenFOAM data into hdf5 format.
 
+Run the following to see a list fields, which can be extracted. 
+/project/def-alamj/shared/bin/v2306/postABLpar info
+
+Following is a list of available fields:
+C, U, UMean, Gij, Tij, Sij, Rij, Lij, vorticity, enstrophy, strain, skewness, stretching, P, pMean
+
+C: cell centers
+Gij: Velocity Gradient
+Sij: strain tensor
+Rij: subgrid scale stress tensor
+Lij: Leonard stress tensor
+strain: S:S, doublly contracted product of strain, magnitude of strain
+skewness: trace(S^3), known as strain skewness
+stretching: wSw, vortex stretching 
+
+Run the following to extract desired fields:
 srun /project/def-alamj/shared/bin/v2306/postABLpar hdf5.txt -time 150 -parallel
+
+hdf5.txt contains a list of options, fields indicate the name of fields. 
+
+To get Leonard stress, we need to filter the velocity according to constant/turbulenceProperties. 
+Use filter yes; in hdf5.txt
+
+The result will be strored in statistics/hdf5/output_index.h5
+
+Run the following to get the list of fields in h5 file
+h5dump -A statistics/hdf5/output_index.h5
+
+Use h5py to read the data and generate statistics. This tool is for statistical analysis only. For visualization purpose, further coding is needed to convert the data into xdmf format. 
+
+
+
 
 
 ## RUN python code 
