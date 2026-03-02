@@ -8,9 +8,13 @@ The following document aims to help post-processing the results of OpenFOAM-base
 
 ### A) Parallel Reconstruction and Sampling
 
-awcmviewer can read the entire flow decomposed over many processors without needing the costly reconstruction step. Currently, we select a few fields over a single time step and from which, we can extract fields values on a line connecting pointA to pointB. This can be done from vdi node as:
+awcmviewer is a tool to read the entire flow field decomposed over many processors without reconstructing to a single processor.
 
-mpirun -np 16 /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analysis line -fields 'U UPrime2Mean UMean' -time 3600 -out fowf15mwR0 -pwd -pointA '10 1320 0' -pointB '10 1320 960'
+# Example to extract data on a line joining pointA to pointB
+srun /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analysis line -fields 'U UMean' -time 36 -out fow -pwd -pointA '10 130 0' -pointB '10 130 960'
+
+
+
 
 It would be more efficient to submit a batch job for extracting data over multiple lines as:
 
