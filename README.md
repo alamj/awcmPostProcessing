@@ -13,7 +13,7 @@ awcmviewer is a tool to read the entire flow field decomposed over many processo
 ## Example to extract data on a line joining pointA to pointB
 srun /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analysis line -fields 'U UMean' -time 36 -out fow -pwd -pointA '10 130 0' -pointB '10 130 960'
 
-The output of the command will be saved in CASE_DIR/statistics/xdmf/fow.h5
+The output of the command will be saved in CASE_DIR/statistics/xdmf/fow.h5, points on the line and fields will be available. 
 
 
 
