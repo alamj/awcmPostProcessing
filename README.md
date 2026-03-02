@@ -6,6 +6,24 @@ SALES adopts three principles: i) implicit filtering of Navier-Stokes equation s
 
 The following document aims to help post-processing the results of OpenFOAM-based SALES methodology.
 
+### A) Parallel Reconstruction and Sampling
+
+awcmviewer can read the entire flow decomposed over many processors without needing the costly reconstruction step. Currently, we select a few fields over a single time step and from which, we can extract fields values on a line connecting pointA to pointB. This can be done from vdi node as:
+
+mpirun -np 16 /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analysis line -fields 'U UPrime2Mean UMean' -time 3600 -out fowf15mwR0 -pwd -pointA '10 1320 0' -pointB '10 1320 960'
+
+It would be more efficient to submit a batch job for extracting data over multiple lines as:
+
+srun /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analysis line -fields 'U UPrime2Mean UMean' -time 3600 -out fowf15mwR0 -pwd -pointA '10 1320 0' -pointB '10 1320 960' > line1.out
+
+srun /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analysis line -fields 'U UPrime2Mean UMean' -time 3600 -out fowf15mwR0 -pwd -pointA '90 1320 0' -pointB '90 1320 960' > line2.out
+
+add more lines as needed
+
+
+
+
+
 ## postABlpar
 This utility will convert OpenFOAM data into hdf5 format.
 
@@ -105,20 +123,6 @@ u = av.fetch_time_series(out, loc, 1, "UPrime2Mean")
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-### Parallel Reconstruction and Sampling
-
-awcmviewer can read the entire flow decomposed over many processors without needing the costly reconstruction step. Currently, we select a few fields over a single time step and from which, we can extract fields values on a line connecting pointA to pointB. This can be done from vdi node as:
-
-mpirun -np 16 /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analysis line -fields 'U UPrime2Mean UMean' -time 3600 -out fowf15mwR0 -pwd -pointA '10 1320 0' -pointB '10 1320 960'
-
-It would be more efficient to submit a batch job for extracting data over multiple lines as:
-
-srun /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analysis line -fields 'U UPrime2Mean UMean' -time 3600 -out fowf15mwR0 -pwd -pointA '10 1320 0' -pointB '10 1320 960' > line1.out
-
-srun /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analysis line -fields 'U UPrime2Mean UMean' -time 3600 -out fowf15mwR0 -pwd -pointA '90 1320 0' -pointB '90 1320 960' > line2.out
-
-add more lines as needed
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
