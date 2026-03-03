@@ -6,17 +6,21 @@ SALES adopts three principles: i) implicit filtering of Navier-Stokes equation s
 
 The following document aims to help post-processing the results of OpenFOAM-based SALES methodology.
 
-### A) Parallel Reconstruction and Sampling
+## A) Parallel Reconstruction and Sampling
 
 awcmviewer is a tool to read the entire flow field decomposed over many processors without reconstructing to a single processor.
 
-## Example to extract data on a line joining pointA to pointB
+### Extract data on a line joining pointA to pointB
 srun /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analysis line -fields 'U UMean' -time 36 -out fow -pwd -pointA '10 130 0' -pointB '10 130 960'
 
 The output of the command will be saved in CASE_DIR/statistics/xdmf/fow.h5, points on the line and fields will be available. 
 
-#### Example
-srun /project/def-alamj/shared/bin/v2306/xpostablDev -INP post_process.inp -analysis aggregate -out wf50deepAVG.h5 -pointA '0 0 1'  -time 350 -fields 'U UPrime2Mean TKE' -pwd -hdf5 wf50deep
+### Aggregate fields on planes parallel to pointA
+srun /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analysis aggregate -out fowAVG.h5 -pointA '0 0 1'  -fields 'U UPrime2Mean TKE' -hdf5 fowDATA.h5
+
+This command will read CASE_DIR/statistics/xdmf/fowDATA.h5, average the listed fields to create mean vertical profile, and save in CASE_DIR/statistics/xdmf/fowAVG.h5
+
+
 
 
 
