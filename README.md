@@ -8,14 +8,47 @@ The following document aims to help post-processing the results of OpenFOAM-base
 
 ## A) Parallel Reconstruction and Sampling
 
+Reconstruction of entire data to a single processor is not practical for a mesh over several hundred millions of grid points. 
+The idea is to parallel reconstruction via MPI tools, which creates a *.h5 file containing flow data and *.xdmf file containing META data.
+
+Paraview can load the xdmf file. Using xtensor and MPI, the .h5 can be further processed in parallel as needed. Moreover, .h5 can be processed in numpy. 
+This is an advantage over traditional reconstruction to single processor. 
+
 awcmviewer is a tool to read the entire flow field decomposed over many processors without reconstructing to a single processor.
+atmosphericLESpost is a tool that reads saved data from a decomposed case and generate new fields
+
+### Generate new field from an existing decomposed case
+
+srun /project/def-alamj/shared/bin/v2306/atmosphericLESpost meshSetup -mode generate -time 350 -fields (Rij Gij Lij Lambda Prod) -filter no -parallel
+
+This command will create Rij (SGS stress tensor), Gij (velocity gradient tensor), Lij (Leonard stress tensor), Lambda (lambda2 criteria), Prod (production term). 
+
+"-filter no" tells not to apply a filter to create Gij
+"Rij" will be saved as Rsgs, Ksgs, and Esgs
+"Prod" will be saved as Prod (production term) and sPrd (shear production term)
+
+### Reconstruct 3D flow field as xdmf + h5 format
+
+srun /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analysis xdmf -fields 'U UPrime2Mean UMean Q Vort' -time 3600 -out fowOUT -pwd  
+
+META data will be saved as CASE_DIR/statistics/xdmf/fowOUT.xdmf
+Flow data will be saved as CASE_DIR/statistics/xdmf/fowOUT.h5
+
 
 ### Extract data on a line joining pointA to pointB
 srun /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analysis line -fields 'U UMean' -time 36 -out fow -pwd -pointA '10 130 0' -pointB '10 130 960'
 
 The output of the command will be saved in CASE_DIR/statistics/xdmf/fow.h5, where points on the line and fields will be available. 
 
-### Aggregate fields on planes parallel to pointA
+### Extract data on a plane and save as xdmf+h5 format
+
+srun /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analysis slice -out fowSLC.h5 -pointA '0 0.5 0.1245' -pointB '0 0 1' -time 350 -fields 'U UPrime2Mean Rsgs'
+
+This command will read U, UPrime2Mean, Rsgs from the 350 time folder and creat a slice on a plane that contains pointA and has a normal of pointB. 
+The result will be saved as CASE_DIR/statistics/xdmf/fowSLC.h5 and CASE_DIR/statistics/xdmf/fowSLC.xdmf.
+
+
+### Aggregate fields on planes normal to pointA
 srun /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analysis aggregate -out fowAVG.h5 -pointA '0 0 1'  -fields 'U UPrime2Mean TKE' -hdf5 fowDATA.h5
 
 This command will read CASE_DIR/statistics/xdmf/fowDATA.h5, average the listed fields to create mean vertical profile, and save in CASE_DIR/statistics/xdmf/fowAVG.h5; here, fowDATA.h5 is created by awcmviewer through xdmf option
