@@ -8,8 +8,8 @@ The following document aims to help post-processing the results of OpenFOAM-base
 
 ## A) Parallel Reconstruction and Sampling
 
-Reconstruction of entire data to a single processor is not practical for a mesh over several hundred millions of grid points. 
-The idea is to parallel reconstruction via MPI tools, which creates a *.h5 file containing flow data and *.xdmf file containing META data.
+Reconstruction of a decomposed mesh data to a single processor is not practical for a mesh over several hundred millions of grid points. 
+The idea considered here is to parallel reconstruction via MPI tools, which creates a *.h5 file containing flow data and *.xdmf file containing META data.
 
 Paraview can load the xdmf file. Using xtensor and MPI, the .h5 can be further processed in parallel as needed. Moreover, .h5 can be processed in numpy. 
 This is an advantage over traditional reconstruction to single processor. 
