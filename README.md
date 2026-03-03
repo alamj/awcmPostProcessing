@@ -13,12 +13,12 @@ awcmviewer is a tool to read the entire flow field decomposed over many processo
 ### Extract data on a line joining pointA to pointB
 srun /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analysis line -fields 'U UMean' -time 36 -out fow -pwd -pointA '10 130 0' -pointB '10 130 960'
 
-The output of the command will be saved in CASE_DIR/statistics/xdmf/fow.h5, points on the line and fields will be available. 
+The output of the command will be saved in CASE_DIR/statistics/xdmf/fow.h5, where points on the line and fields will be available. 
 
 ### Aggregate fields on planes parallel to pointA
 srun /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analysis aggregate -out fowAVG.h5 -pointA '0 0 1'  -fields 'U UPrime2Mean TKE' -hdf5 fowDATA.h5
 
-This command will read CASE_DIR/statistics/xdmf/fowDATA.h5, average the listed fields to create mean vertical profile, and save in CASE_DIR/statistics/xdmf/fowAVG.h5
+This command will read CASE_DIR/statistics/xdmf/fowDATA.h5, average the listed fields to create mean vertical profile, and save in CASE_DIR/statistics/xdmf/fowAVG.h5; here, fowDATA.h5 is created by awcmviewer through xdmf option
 
 
 
