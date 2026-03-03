@@ -15,7 +15,8 @@ srun /project/def-alamj/shared/bin/v2306/awcmviewer -INP post_process.inp -analy
 
 The output of the command will be saved in CASE_DIR/statistics/xdmf/fow.h5, points on the line and fields will be available. 
 
-
+# Example
+srun /project/def-alamj/shared/bin/v2306/xpostablDev -INP post_process.inp -analysis aggregate -out wf50deepAVG.h5 -pointA '0 0 1'  -time 350 -fields 'U UPrime2Mean TKE' -pwd -hdf5 wf50deep
 
 
 
